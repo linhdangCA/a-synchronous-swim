@@ -16,12 +16,12 @@
   }
   var repeatSwimCommandFetcher = () => {
     console.log('if we see this, repeat works');
-    setInterval(swimCommandFetcher, 5000)
+    setInterval(swimCommandFetcher, 1000)
   }
   repeatSwimCommandFetcher();
 
-
   // swimCommandFetcher();
+
   // $('body').on('click', function() {
   //   swimCommandFetcher();
   // })
