@@ -14,13 +14,31 @@
       // error: runs function (jqXHR object, string textStatus, string errorThrown) if error is received
     });
   }
-  var repeatSwimCommandFetcher = () => {
-    console.log('if we see this, repeat works');
-    setInterval(swimCommandFetcher, 3000)
-  }
-  repeatSwimCommandFetcher();
+  // var repeatSwimCommandFetcher = () => {
+  //   console.log('if we see this, repeat works');
+  //   setInterval(swimCommandFetcher, 3000)
+  // }
+  // repeatSwimCommandFetcher();
 
-  // swimCommandFetcher();
+  const backgroundFetcher = () => {
+    $.ajax({
+      type: 'GET',
+      data: {},
+      url: serverUrl + '/background.jpg',
+      success: () => {
+        // window.location = window.location.href;
+      }
+    });
+  }
+
+  backgroundFetcher();
+
+  swimCommandFetcher();
+  setInterval(() => {
+    console.log('if we see this, repeat works');
+    swimCommandFetcher();
+  }, 3000);
+
 
   // $('body').on('click', function() {
   //   swimCommandFetcher();
@@ -37,13 +55,14 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: serverUrl,
+      url: serverUrl + '/background.jpg',
       cache: false, // false will force requested pages not to be cached by the browser
       contentType: false, // defaulted to character set
       processData: false, // normally defaulted to true, set to false to prevent transforming data to a string
       success: () => {
+        // console.log(data);
         // reload the page
-        window.location = window.location.href;
+        // window.location = window.location.href;
       }
     });
   };
