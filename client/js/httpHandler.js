@@ -5,6 +5,26 @@
   //
   // TODO: build the swim command fetcher here
   //
+  const swimCommandFetcher = () => {
+    $.ajax({
+      type: 'GET',
+      data: {},
+      url: serverUrl,
+      success: (res) => (SwimTeam.move(res)) //runs function (data, string that describes status, jqXHR object) if success message received
+      // error: runs function (jqXHR object, string textStatus, string errorThrown) if error is received
+    });
+  }
+  var repeatSwimCommandFetcher = () => {
+    console.log('if we see this, repeat works');
+    setInterval(swimCommandFetcher, 5000)
+  }
+  repeatSwimCommandFetcher();
+
+
+  // swimCommandFetcher();
+  // $('body').on('click', function() {
+  //   swimCommandFetcher();
+  // })
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
@@ -17,10 +37,10 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: 'FILL_ME_IN',
-      cache: false,
-      contentType: false,
-      processData: false,
+      url: serverUrl,
+      cache: false, // false will force requested pages not to be cached by the browser
+      contentType: false, // defaulted to character set
+      processData: false, // normally defaulted to true, set to false to prevent transforming data to a string
       success: () => {
         // reload the page
         window.location = window.location.href;

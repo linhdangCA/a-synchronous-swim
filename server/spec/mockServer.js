@@ -9,11 +9,13 @@ var request = function(url, method, postdata) {
   this.url = url;
   this.method = method;
   this._postData = postdata;
+  //causes the stream data to be returned as strings
   this.setEncoding = function() { /* noop */ };
 
   this.addListener = this.on = (type, callback) => {
     if (type === 'data') {
       if (this._postData) {
+        // Buffer.from() creates a buffer
         callback(Buffer.from(this._postData));
       } else {
         callback(Buffer.from(''));
@@ -30,21 +32,24 @@ var response = function() {
   this._ended = false;
   this._responseCode = null;
   this._headers = null;
+  // Creates a buffer
   this._data = Buffer.alloc(0);
 
   this.on = this.once = this.emit = ()=>{};
 
+  // .writeHead sends a response header to the request.
+  // The headers argument are the response headers
   this.writeHead = (responseCode, headers) => {
     this._responseCode = responseCode;
     this._headers = headers;
   };
-
+  // .write sends a chunk of the response body
   this.write = (data) => {
     if (data) {
       this._data = Buffer.concat([this._data, Buffer.from(data)]);
     }
   };
-
+  // response.end signals the server that all of the response headers and body have been sent
   this.end = (data) => {
     this._ended = true;
     if (data) {
