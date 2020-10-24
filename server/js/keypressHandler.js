@@ -58,6 +58,8 @@ module.exports.initialize = (callback) => {
       logKeypress(key.name);
     }
 
+    messageQueue.enqueue(message);
+
   });
 };
 
