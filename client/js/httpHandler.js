@@ -16,7 +16,7 @@
   }
   var repeatSwimCommandFetcher = () => {
     console.log('if we see this, repeat works');
-    setInterval(swimCommandFetcher, 1000)
+    setInterval(swimCommandFetcher, 3000)
   }
   repeatSwimCommandFetcher();
 
