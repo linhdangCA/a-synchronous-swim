@@ -38,8 +38,9 @@ module.exports.initialize = (callback) => {
 
     // check to see if the keypress itself is a valid message
     if (isValidMessage(key.name)) {
-      messageQueue.enqueue(key.name);
-      console.log('key.name:', key.name, 'queue:', messageQueue);
+      // messageQueue.enqueue(key.name);
+      // console.log('key.name:', key.name, 'queue:', messageQueue);
+      callback(key.name);
       return;
     }
 
